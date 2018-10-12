@@ -7,7 +7,7 @@ sudo: false
 
 env:
   # The following are maintained by the Community Maintenance Team
-  - REPO=assert
+  - REPO=assign
   - REPO=concept_check
   - REPO=disjoint_sets
   - REPO=dynamic_bitset
