@@ -1,0 +1,38 @@
+# Copyright 2018 Peter Dimov
+# Copyright (C) 2018 - 2021 James E. King III
+# Distributed under the Boost Software License, Version 1.0.
+
+name: Check
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+permissions:
+  contents: read
+
+jobs:
+  strategy:
+    matrix:
+      repo:
+        # primary maintenance
+        - date_time
+        - format
+        - uuid
+        # community maintenance
+        - assign
+        - concept_check
+        - dynamic_bitset
+        - interval
+        - iostreams
+        - logic
+        - mpl
+        - pool
+        - property_map
+        - ptr_container
+        - rational
+        - statechart
+        - tokenizer
+
+  steps:
+    - run: git clone https://github.com/boostorg/$REPO && git -C $REPO diff --name-status --exit-code origin/master origin/develop
+
