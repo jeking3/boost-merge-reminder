@@ -14,28 +14,34 @@ permissions:
   contents: read
 
 jobs:
-  strategy:
-    matrix:
-      repo:
-        # primary maintenance
-        - date_time
-        - format
-        - uuid
-        # community maintenance
-        - assign
-        - concept_check
-        - dynamic_bitset
-        - interval
-        - iostreams
-        - logic
-        - mpl
-        - pool
-        - property_map
-        - ptr_container
-        - rational
-        - statechart
-        - tokenizer
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo:
+          # primary maintenance
+          - date_time
+          - format
+          - uuid
+          # community maintenance
+          - assign
+          - concept_check
+          - dynamic_bitset
+          - interval
+          - iostreams
+          - logic
+          - mpl
+          - pool
+          - property_map
+          - ptr_container
+          - rational
+          - statechart
+          - tokenizer
 
-  steps:
-    - run: git clone https://github.com/boostorg/$REPO && git -C $REPO diff --name-status --exit-code origin/master origin/develop
+    steps:
+      - name: Check ${{ matrix.repo }}
+        env:
+          REPO: ${{ matrix.repo }}
+        run: |
+          git clone https://github.com/boostorg/$REPO && git -C $REPO diff --name-status --exit-code origin/master origin/develop
 
