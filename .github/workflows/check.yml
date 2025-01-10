@@ -27,6 +27,7 @@ jobs:
           # community maintenance
           - assign
           - concept_check
+          - contract
           - dynamic_bitset
           - interval
           - iostreams
